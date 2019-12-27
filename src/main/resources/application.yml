@@ -1,0 +1,11 @@
+spring:
+  messages:
+    #文件编码
+    encoding: utf-8
+    #国际化文件基础名称
+    basename: international
+    #国际化消息缓存有效时间（单位 秒） 超时将重新载入
+    cache-duration: 3600
+
+
+
