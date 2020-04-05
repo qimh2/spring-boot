@@ -1,12 +1,16 @@
 package com.qimh.entitys;
 
+import com.qimh.aspect.FieldAnnotation;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class UserEntity implements Serializable {
     private Long id;
     private String guid;
+    @FieldAnnotation(filedName = "name")
     private String name;
+    @FieldAnnotation(filedName = "age")
     private String age;
     private Date createTime;
 
