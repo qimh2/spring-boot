@@ -1,11 +1,27 @@
-spring:
-  messages:
-    #文件编码
-    encoding: utf-8
-    #国际化文件基础名称
-    basename: international
-    #国际化消息缓存有效时间（单位 秒） 超时将重新载入
-    cache-duration: 3600
+#spring:
+#  messages:
+#    #文件编码
+#    encoding: utf-8
+#    #国际化文件基础名称
+#    basename: international
+#    #国际化消息缓存有效时间（单位 秒） 超时将重新载入
+#    cache-duration: 3600
 
+
+spring:
+  redis:
+   # Redis开关/默认关闭
+    enabled: true
+    database: 0
+    password:     #redis密码
+    host: 127.0.0.1
+    port: 6379
+    lettuce:
+      pool:
+      max-active:  100 # 连接池最大连接数（使用负值表示没有限制）
+      max-idle: 100 # 连接池中的最大空闲连接
+      min-idle: 50 # 连接池中的最小空闲连接
+      max-wait: 6000 # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      timeout: 1000
 
 

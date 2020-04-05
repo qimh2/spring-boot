@@ -40,7 +40,7 @@ public class RequestDataValidateController {
         vp.setAge(validatorPojo.getAge());
 
 
-        Map<String,Object> errMap = new HashMap<>();
+        Map<String,Object> errMap = new HashMap<String,Object>();
 
         //获取错误列表
         List<ObjectError> oes = errors.getAllErrors();
@@ -103,7 +103,7 @@ public class RequestDataValidateController {
 
 
 
-        Map<String,Object> errMap = new HashMap<>();
+        Map<String,Object> errMap = new HashMap<String,Object>();
 
         //获取错误列表
         List<ObjectError> oes = errors.getAllErrors();
