@@ -25,3 +25,12 @@ spring:
       timeout: 1000
 
 
+
+
+
+clue:
+  date:
+    todayBeforeDays: 3
+timer:
+  executeTime: "16:25:00"
+  oneDay: 10
