@@ -1,5 +1,6 @@
 package com.qimh.springdemo;
 
+import com.google.common.collect.Maps;
 import com.qimh.entitys.UserEntity;
 
 import java.util.*;
@@ -14,7 +15,9 @@ public class MainTest {
 
 
 
-        testOptionalMap();
+//        testOptionalMap();
+
+        testMapLoop();
 
 
 
@@ -83,6 +86,19 @@ public class MainTest {
         // 如果容器的对象存在，则对其执行调用mapping函数得到返回值。然后创建包含mapping返回值的Optional，否则返回空Optional。
 //        optional.flatMap(UserEntity::getName).map(user->user.);
 //        System.out.println( ss);
+    }
+
+    /**
+     * map 的遍历方式
+     */
+    public static void testMapLoop(){
+        Map<String,String> maps = Maps.newHashMap();
+        maps.put("aa","AA");
+        maps.put("bb","BB");
+
+        for(String key:maps.keySet()){
+            System.out.println("key:" + key + "  value:" + maps.get(key));
+        }
     }
 
 
