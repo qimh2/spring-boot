@@ -6,6 +6,8 @@ package com.qimh.springdemo;
 public class Demo {
 
 
+
+
     class A{
         int i ;
         A(int i ){
