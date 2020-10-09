@@ -19,6 +19,9 @@ public class MainTest {
 
         testMapLoop();
 
+        Byte var = 9;
+        int i = var;
+
 
 
     }
