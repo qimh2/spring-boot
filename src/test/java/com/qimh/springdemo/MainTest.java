@@ -4,6 +4,8 @@ import com.google.common.collect.Maps;
 import com.qimh.entitys.UserEntity;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author qiminhui
@@ -21,6 +23,21 @@ public class MainTest {
 
         Byte var = 9;
         int i = var;
+//        AtomicReference ar = new AtomicReference();
+        AtomicInteger ai = new AtomicInteger();
+        AtomicInteger ai2 = new AtomicInteger();
+        AtomicInteger ai3 = new AtomicInteger();
+
+
+        for(int m = 0;m < 3 ;m++){
+            System.out.println("m:" +m);
+//            ar.getAndSet(m);
+            ai.addAndGet(m);
+            ai2.getAndSet(m);
+        }
+//        System.out.println("ar:"+ar.get());
+        System.out.println("ai:"+ai.get());
+        System.out.println("ai2:"+ai2.get());
 
 
 
