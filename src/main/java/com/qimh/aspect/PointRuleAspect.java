@@ -21,7 +21,7 @@ public class PointRuleAspect {
     /**
      * 【public】 方法访问修饰符为public
      * 【*】 方法返回类型为任意类型
-     * 【com.qimh.controller..getPoint】为com.qimh.controller包下的getPoint 方法
+     * 【com.qimh.controller..getPoint】为com.qimh.controller包下的getPoint|| getPoint2方法
      * 【(..)】 方法参数为0个或多个任意参数
      * 参数解释连接：
      * https://xdoctorx.blog.csdn.net/article/details/107429359
