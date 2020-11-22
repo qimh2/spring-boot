@@ -42,6 +42,7 @@ public class MethodLogAspect {
             System.out.println("后置通知");
         } catch (Throwable e) {
             System.out.println("异常通知");
+            e.printStackTrace();
         }
         System.out.println("返回通知");
         System.out.println("result:" + result);
