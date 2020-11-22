@@ -18,6 +18,18 @@ public class PointController {
 
         return new RestResp<>(point);
     }
+    @PostMapping("/getPoint2")
+    @PointRule
+    public RestResp<Point> getPoint2(@RequestBody Point point){
+
+        return new RestResp<>(point);
+    }
+    @PostMapping("/getPoint3")
+    @PointRule
+    public RestResp<Point> getPoint3(@RequestBody Point point){
+
+        return new RestResp<>(point);
+    }
 
 
 }

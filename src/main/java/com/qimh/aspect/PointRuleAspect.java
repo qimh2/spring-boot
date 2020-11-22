@@ -12,18 +12,24 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.ExtendedServletRequestDataBinder;
 
 import javax.servlet.http.HttpServletResponseWrapper;
-import javax.validation.constraints.Null;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 @Aspect
 @Component
 public class PointRuleAspect {
 
+    /**
+     * 【public】 方法访问修饰符为public
+     * 【*】 方法返回类型为任意类型
+     * 【com.qimh.controller..getPoint】为com.qimh.controller包下的getPoint 方法
+     * 【(..)】 方法参数为0个或多个任意参数
+     * 参数解释连接：
+     * https://xdoctorx.blog.csdn.net/article/details/107429359
+     * https://blog.csdn.net/stayoutthere/article/details/55670723
+     */
     //定义切点
-    @Pointcut("@annotation(com.qimh.aspect.PointRule)")
+//    @Pointcut("@annotation(com.qimh.aspect.PointRule)")
+    @Pointcut("execution(public * com.qimh.controller..getPoint(..)) || execution(public * com.qimh.controller..getPoint2(..))")
     public void doAspect() {
     }
 
