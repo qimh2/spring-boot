@@ -1,11 +1,10 @@
 package com.qimh.springdemo;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.qimh.entitys.UserEntity;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author qiminhui
@@ -13,31 +12,33 @@ import java.util.concurrent.atomic.AtomicReference;
 public class MainTest {
 
     public static void main(String[] args){
+
+        testComputeIfAbsent();
 //        Lock lock = new ReentrantLock();
 
 
 
 //        testOptionalMap();
 
-        testMapLoop();
+//        testMapLoop();
 
         Byte var = 9;
         int i = var;
 //        AtomicReference ar = new AtomicReference();
-        AtomicInteger ai = new AtomicInteger();
-        AtomicInteger ai2 = new AtomicInteger();
-        AtomicInteger ai3 = new AtomicInteger();
+//        AtomicInteger ai = new AtomicInteger();
+//        AtomicInteger ai2 = new AtomicInteger();
+//        AtomicInteger ai3 = new AtomicInteger();
 
 
-        for(int m = 0;m < 3 ;m++){
-            System.out.println("m:" +m);
-//            ar.getAndSet(m);
-            ai.addAndGet(m);
-            ai2.getAndSet(m);
-        }
-//        System.out.println("ar:"+ar.get());
-        System.out.println("ai:"+ai.get());
-        System.out.println("ai2:"+ai2.get());
+//        for(int m = 0;m < 3 ;m++){
+//            System.out.println("m:" +m);
+////            ar.getAndSet(m);
+//            ai.addAndGet(m);
+//            ai2.getAndSet(m);
+//        }
+////        System.out.println("ar:"+ar.get());
+//        System.out.println("ai:"+ai.get());
+//        System.out.println("ai2:"+ai2.get());
 
 
 
@@ -119,6 +120,35 @@ public class MainTest {
         for(String key:maps.keySet()){
             System.out.println("key:" + key + "  value:" + maps.get(key));
         }
+    }
+
+
+    /**
+     * map computeIfAbsent 和 computeIfPresent 用法
+     */
+    public static void testComputeIfAbsent(){
+        // 创建一个 HashMap
+        HashMap<String, Integer> prices = new HashMap<>();
+
+        // 往HashMap中添加映射项
+        prices.put("Shoes", 200);
+        prices.put("Bag", 300);
+        prices.put("Pant", 150);
+        System.out.println("HashMap: " + prices);
+
+        // 计算Shit的值
+        //若值不存在
+        int shirtPrice = prices.computeIfAbsent("Shirt", key -> 280);
+        System.out.println("Price of Shirt: " + shirtPrice);
+
+        // 输出更新后的HashMap
+        System.out.println("Updated HashMap: " + prices);
+
+        Map<String,Object> map = Maps.newHashMap();
+        map.put("uids","11,22,33");
+        //若值存在
+        map.computeIfPresent("uids", (k, v) -> v.toString().split(","));
+        System.out.println("map:" + JSON.toJSONString(map));
     }
 
 
