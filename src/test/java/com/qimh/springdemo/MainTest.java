@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.qimh.entitys.UserEntity;
 
+import java.time.*;
+import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 /**
@@ -12,8 +14,9 @@ import java.util.*;
 public class MainTest {
 
     public static void main(String[] args){
-
-        testComputeIfAbsent();
+        testLocalDate2();
+//        testLocalDate();
+//        testComputeIfAbsent();
 //        Lock lock = new ReentrantLock();
 
 
@@ -151,6 +154,39 @@ public class MainTest {
         System.out.println("map:" + JSON.toJSONString(map));
     }
 
+
+    public static void testLocalDate(){
+        LocalDate date = LocalDate.of(2018, 10, 31);//2018-10-31
+        int year = date.getYear();//2018
+        Month month = date.getMonth();//OCTOBER
+        int day = date.getDayOfMonth();//31
+        DayOfWeek dow = date.getDayOfWeek();//WEDNESDAY
+        int len = date.lengthOfMonth();//31
+        boolean leap = date.isLeapYear();//false
+
+        LocalDate today = LocalDate.now();
+        /**
+         * java.time.LocalDate.atStartOfDay()方法将此日期与午夜时间组合在一起，以便在此日期开始时创建LocalDateTime。
+         * //原文出自【易百教程】，商业转载请联系作者获得授权，非商业请保留原文链接：https://www.yiibai.com/javatime/javatime_localdate_atstartofday.html
+         */
+        LocalDateTime startOfDay = today.atStartOfDay();
+        System.out.println("startOfDay:" + startOfDay);
+
+        Instant start = startOfDay.toInstant(ZoneOffset.ofHours(8));
+        System.out.println("start:" + start);
+    }
+
+    public static void testLocalDate2(){
+        Instant start = null;
+        Instant end = null;
+
+        LocalDate today = LocalDate.now();
+        start = today.with(TemporalAdjusters.firstDayOfYear()).atStartOfDay().toInstant(ZoneOffset.ofHours(8));
+        end = today.with(TemporalAdjusters.firstDayOfNextYear()).atStartOfDay()
+                .toInstant(ZoneOffset.ofHours(8));
+
+        System.out.println("start:" + start + "  end:" + end);
+    }
 
 
 
