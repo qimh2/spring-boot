@@ -7,6 +7,7 @@ import com.qimh.entitys.UserEntity;
 import java.time.*;
 import java.time.temporal.TemporalAdjusters;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author qiminhui
@@ -14,7 +15,19 @@ import java.util.*;
 public class MainTest {
 
     public static void main(String[] args){
-        testLocalDate2();
+        AtomicInteger num = new AtomicInteger(0);
+        testInt(num);
+        testInt2(num);
+//        Integer num = 1;
+//        Integer num2 = 1;
+//        System.out.println(num.equals(num2));
+
+
+        testStr();
+//        System.out.println(testReturn());
+//        testExceptionExecutor();
+
+//        testLocalDate2();
 //        testLocalDate();
 //        testComputeIfAbsent();
 //        Lock lock = new ReentrantLock();
@@ -45,6 +58,17 @@ public class MainTest {
 
 
 
+    }
+
+
+    public static void testInt(AtomicInteger num){
+        System.out.println(num.get());
+         num.getAndIncrement();
+    }
+    public static void testInt2(AtomicInteger num){
+        System.out.println(num);
+        num.getAndIncrement();
+        System.out.println(num);
     }
 
     /**
@@ -186,6 +210,108 @@ public class MainTest {
                 .toInstant(ZoneOffset.ofHours(8));
 
         System.out.println("start:" + start + "  end:" + end);
+    }
+
+
+    public static void testExceptionExecutor(){
+        try {
+            int i = 1/0;
+        }catch (Exception ex){
+            throw new RuntimeException(ex);
+        }
+        System.out.println("end");
+    }
+
+    public static String testReturn(){
+        if (true){
+            return testReturn2();
+        }
+        System.out.println("return1");
+        return "";
+    }
+
+    public static String testReturn2(){
+        System.out.println("return2");
+        return "aa";
+    }
+
+    public static void testStr(){
+        String orderInfo = "{\n" +
+                "    \"partsTotalQuantity\": \"2\", \n" +
+                "    \"model\": \"AS28车型\", \n" +
+                "    \"tel\": \"17688880002\", \n" +
+                "    \"ascAddress\": \"江苏省常熟市开元东路6号\", \n" +
+                "    \"reservationServiceType\": \"维修\", \n" +
+                "    \"reservationDate\": \"2020-11-29\", \n" +
+                "    \"ascCode\": \"2100396\", \n" +
+                "    \"type\": \"add\", \n" +
+                "    \"discountAmount\": \"0.0\", \n" +
+                "    \"userType\": \"普通用户\", \n" +
+                "    \"ascMailbox\": \"621150030@qq.com\", \n" +
+                "    \"actualTotalAmount\": \"147.00\", \n" +
+                "    \"licenseNo\": \"沪SS12582\", \n" +
+                "    \"vehId\": \"100861526381277\", \n" +
+                "    \"bookingOrderId\": \"1173100001\", \n" +
+                "    \"userId\": \"96921167798856\", \n" +
+                "    \"name\": \"嘚嘚\", \n" +
+                "    \"totalAmount\": \"147.00\", \n" +
+                "    \"tbMaintenanceOrderSaicItemTobs\": [\n" +
+                "        {\n" +
+                "            \"partCode\": \"10514332\", \n" +
+                "            \"itemPartName\": \"风窗玻璃刮水器刮片总成(驾驶侧)\n" +
+                "\", \n" +
+                "            \"partPrice\": \"58.5\", \n" +
+                "            \"partCount\": \"1\", \n" +
+                "            \"serviceItemName\": \"更换前雨刮片（一对）\"\n" +
+                "        }, \n" +
+                "        {\n" +
+                "            \"partCode\": \"10514335\", \n" +
+                "            \"itemPartName\": \"风窗玻璃刮水器刮片总成(乘客侧)\n" +
+                "\", \n" +
+                "            \"partPrice\": \"58.5\", \n" +
+                "            \"partCount\": \"1\", \n" +
+                "            \"serviceItemName\": \"更换前雨刮片（一对）\"\n" +
+                "        }\n" +
+                "    ], \n" +
+                "    \"tbMaintenanceOrderSaicCostTobs\": [\n" +
+                "        {\n" +
+                "            \"typeName\": \"常规保养\", \n" +
+                "            \"manHourPrice\": \"100.0\", \n" +
+                "            \"vin\": \"LSJA24U90KS160688\", \n" +
+                "            \"asPlatformCode\": \"荣威RX5MAX\", \n" +
+                "            \"laborCode\": \"681A009\", \n" +
+                "            \"service\": \"更换前雨刮片\", \n" +
+                "            \"manHourCount\": \"0.3\", \n" +
+                "            \"ascCode\": \"2100396\", \n" +
+                "            \"sysName\": \"车身电器\", \n" +
+                "            \"laborDesc\": \"更换前雨刮片\"\n" +
+                "        }\n" +
+                "    ], \n" +
+                "    \"payMethod\": \"2\", \n" +
+                "    \"isNeedCoupon\": 0, \n" +
+                "    \"uniOrderId\": \"781570925664632832\", \n" +
+                "    \"mileage\": \"0.0\", \n" +
+                "    \"reservationPeriod\": \"10:15-10:45\", \n" +
+                "    \"ascHotLine\": \"0512-52670583\", \n" +
+                "    \"orderType\": \"1\", \n" +
+                "    \"laborCost\": \"30.00\", \n" +
+                "    \"vinNo\": \"LSJA24U90KS160688\", \n" +
+                "    \"couponCode\": \"\", \n" +
+                "    \"supplierCode\": \"210079\", \n" +
+                "    \"orderStatus\": \"0\", \n" +
+                "    \"discount\": \"0.00\", \n" +
+                "    \"reservationType\": \"1\", \n" +
+                "    \"source\": \"NDMS\", \n" +
+                "    \"ascShortName\": \"常熟申荣\", \n" +
+                "    \"ascCity\": \"苏州市\", \n" +
+                "    \"manHourTotalQuantity\": \"0.3\", \n" +
+                "    \"ascFullName\": \"常熟申荣汽车销售服务有限公司\", \n" +
+                "    \"partsTotalAmount\": \"117.00\", \n" +
+                "    \"bookingType\": \"1\", \n" +
+                "    \"operationTime\": \"2020-11-26 15:54:53\", \n" +
+                "    \"addTime\": \"2020-11-26 17:23:49\"\n" +
+                "}";
+        System.out.println(JSON.toJSONString(orderInfo).toString());
     }
 
 
