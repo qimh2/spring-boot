@@ -2,26 +2,62 @@ package com.qimh.springdemo;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
+import com.qimh.entitys.Point;
+import com.qimh.entitys.Point2;
 import com.qimh.entitys.UserEntity;
-
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneOffset;
 import java.time.temporal.TemporalAdjusters;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author qiminhui
  */
 public class MainTest {
 
-    public static void main(String[] args){
+    private static Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
+
+    public static void main(String[] args) {
+
+        System.out.println(Point.class.getName());
+        System.out.println(Point2.class.getName());
+        System.out.println(UserEntity.class.getName());
+
+        int num2 = 0;
+        try {
+            num2 = 1/0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("num2:{}",num2,e);
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR, 24);
+        System.out.println("dateTime:" + calendar.getTime());
+
+        String str = "11111     ";
+        System.out.println(str + "|");
+        System.out.println(str.trim() + "|");
+
         AtomicInteger num = new AtomicInteger(0);
         testInt(num);
         testInt2(num);
 //        Integer num = 1;
 //        Integer num2 = 1;
 //        System.out.println(num.equals(num2));
-
 
         testStr();
 //        System.out.println(testReturn());
@@ -31,8 +67,6 @@ public class MainTest {
 //        testLocalDate();
 //        testComputeIfAbsent();
 //        Lock lock = new ReentrantLock();
-
-
 
 //        testOptionalMap();
 
@@ -45,7 +79,6 @@ public class MainTest {
 //        AtomicInteger ai2 = new AtomicInteger();
 //        AtomicInteger ai3 = new AtomicInteger();
 
-
 //        for(int m = 0;m < 3 ;m++){
 //            System.out.println("m:" +m);
 ////            ar.getAndSet(m);
@@ -56,16 +89,15 @@ public class MainTest {
 //        System.out.println("ai:"+ai.get());
 //        System.out.println("ai2:"+ai2.get());
 
-
-
     }
 
 
-    public static void testInt(AtomicInteger num){
+    public static void testInt(AtomicInteger num) {
         System.out.println(num.get());
-         num.getAndIncrement();
+        num.getAndIncrement();
     }
-    public static void testInt2(AtomicInteger num){
+
+    public static void testInt2(AtomicInteger num) {
         System.out.println(num);
         num.getAndIncrement();
         System.out.println(num);
@@ -74,21 +106,19 @@ public class MainTest {
     /**
      * 测试迭代器遍历的时候，不能修改集合的内容
      */
-    public static void testIteator(){
+    public static void testIteator() {
         List<String> list = new ArrayList<>();
-        for (int i = 0;i < 10;i++){
+        for (int i = 0; i < 10; i++) {
             list.add("a" + i);
         }
 
-
-
-        Iterator<String> it2 = list. iterator();
+        Iterator<String> it2 = list.iterator();
         //验证iterator 迭代器遍历时，不能删除集合的元素，否则会报： java.util.ConcurrentModificationException
         new Thread() {
             @Override
             public void run() {
-                while(it2. hasNext()){
-                    String obj = it2. next();
+                while (it2.hasNext()) {
+                    String obj = it2.next();
                     System.out.println("remove");
                     it2.remove();
 
@@ -97,12 +127,11 @@ public class MainTest {
             }
         }.start();
 
-
-        Iterator<String> it = list. iterator();
-        while(it. hasNext()){
-            String obj = it. next();
+        Iterator<String> it = list.iterator();
+        while (it.hasNext()) {
+            String obj = it.next();
             it.remove();
-            System. out. println(obj);
+            System.out.println(obj);
 
         }
     }
@@ -111,14 +140,14 @@ public class MainTest {
      * 测试Optional--map
      */
 
-    public static void testOptionalMap(){
+    public static void testOptionalMap() {
         UserEntity user = new UserEntity();
         user.setName("aa");
         Optional<UserEntity> optional = Optional.ofNullable(user);
 
         // 如果容器的对象存在，则对其执行调用mapping函数得到返回值。然后创建包含mapping返回值的Optional，否则返回空Optional。
         String ss = optional.map(user1 -> user1.getName()).orElse("Unknown");
-        System.out.println( ss);
+        System.out.println(ss);
     }
 
 
@@ -126,7 +155,7 @@ public class MainTest {
      * 测试Optional--FlaMap
      */
 
-    public static void testOptionalFlaMap(){
+    public static void testOptionalFlaMap() {
         UserEntity user = new UserEntity();
         user.setName("aa");
         Optional<UserEntity> optional = Optional.ofNullable(user);
@@ -139,12 +168,12 @@ public class MainTest {
     /**
      * map 的遍历方式
      */
-    public static void testMapLoop(){
-        Map<String,String> maps = Maps.newHashMap();
-        maps.put("aa","AA");
-        maps.put("bb","BB");
+    public static void testMapLoop() {
+        Map<String, String> maps = Maps.newHashMap();
+        maps.put("aa", "AA");
+        maps.put("bb", "BB");
 
-        for(String key:maps.keySet()){
+        for (String key : maps.keySet()) {
             System.out.println("key:" + key + "  value:" + maps.get(key));
         }
     }
@@ -153,7 +182,7 @@ public class MainTest {
     /**
      * map computeIfAbsent 和 computeIfPresent 用法
      */
-    public static void testComputeIfAbsent(){
+    public static void testComputeIfAbsent() {
         // 创建一个 HashMap
         HashMap<String, Integer> prices = new HashMap<>();
 
@@ -171,15 +200,15 @@ public class MainTest {
         // 输出更新后的HashMap
         System.out.println("Updated HashMap: " + prices);
 
-        Map<String,Object> map = Maps.newHashMap();
-        map.put("uids","11,22,33");
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("uids", "11,22,33");
         //若值存在
         map.computeIfPresent("uids", (k, v) -> v.toString().split(","));
         System.out.println("map:" + JSON.toJSONString(map));
     }
 
 
-    public static void testLocalDate(){
+    public static void testLocalDate() {
         LocalDate date = LocalDate.of(2018, 10, 31);//2018-10-31
         int year = date.getYear();//2018
         Month month = date.getMonth();//OCTOBER
@@ -200,120 +229,119 @@ public class MainTest {
         System.out.println("start:" + start);
     }
 
-    public static void testLocalDate2(){
+    public static void testLocalDate2() {
         Instant start = null;
         Instant end = null;
 
         LocalDate today = LocalDate.now();
         start = today.with(TemporalAdjusters.firstDayOfYear()).atStartOfDay().toInstant(ZoneOffset.ofHours(8));
         end = today.with(TemporalAdjusters.firstDayOfNextYear()).atStartOfDay()
-                .toInstant(ZoneOffset.ofHours(8));
+            .toInstant(ZoneOffset.ofHours(8));
 
         System.out.println("start:" + start + "  end:" + end);
     }
 
 
-    public static void testExceptionExecutor(){
+    public static void testExceptionExecutor() {
         try {
-            int i = 1/0;
-        }catch (Exception ex){
+            int i = 1 / 0;
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
         System.out.println("end");
     }
 
-    public static String testReturn(){
-        if (true){
+    public static String testReturn() {
+        if (true) {
             return testReturn2();
         }
         System.out.println("return1");
         return "";
     }
 
-    public static String testReturn2(){
+    public static String testReturn2() {
         System.out.println("return2");
         return "aa";
     }
 
-    public static void testStr(){
+    public static void testStr() {
         String orderInfo = "{\n" +
-                "    \"partsTotalQuantity\": \"2\", \n" +
-                "    \"model\": \"AS28车型\", \n" +
-                "    \"tel\": \"17688880002\", \n" +
-                "    \"ascAddress\": \"江苏省常熟市开元东路6号\", \n" +
-                "    \"reservationServiceType\": \"维修\", \n" +
-                "    \"reservationDate\": \"2020-11-29\", \n" +
-                "    \"ascCode\": \"2100396\", \n" +
-                "    \"type\": \"add\", \n" +
-                "    \"discountAmount\": \"0.0\", \n" +
-                "    \"userType\": \"普通用户\", \n" +
-                "    \"ascMailbox\": \"621150030@qq.com\", \n" +
-                "    \"actualTotalAmount\": \"147.00\", \n" +
-                "    \"licenseNo\": \"沪SS12582\", \n" +
-                "    \"vehId\": \"100861526381277\", \n" +
-                "    \"bookingOrderId\": \"1173100001\", \n" +
-                "    \"userId\": \"96921167798856\", \n" +
-                "    \"name\": \"嘚嘚\", \n" +
-                "    \"totalAmount\": \"147.00\", \n" +
-                "    \"tbMaintenanceOrderSaicItemTobs\": [\n" +
-                "        {\n" +
-                "            \"partCode\": \"10514332\", \n" +
-                "            \"itemPartName\": \"风窗玻璃刮水器刮片总成(驾驶侧)\n" +
-                "\", \n" +
-                "            \"partPrice\": \"58.5\", \n" +
-                "            \"partCount\": \"1\", \n" +
-                "            \"serviceItemName\": \"更换前雨刮片（一对）\"\n" +
-                "        }, \n" +
-                "        {\n" +
-                "            \"partCode\": \"10514335\", \n" +
-                "            \"itemPartName\": \"风窗玻璃刮水器刮片总成(乘客侧)\n" +
-                "\", \n" +
-                "            \"partPrice\": \"58.5\", \n" +
-                "            \"partCount\": \"1\", \n" +
-                "            \"serviceItemName\": \"更换前雨刮片（一对）\"\n" +
-                "        }\n" +
-                "    ], \n" +
-                "    \"tbMaintenanceOrderSaicCostTobs\": [\n" +
-                "        {\n" +
-                "            \"typeName\": \"常规保养\", \n" +
-                "            \"manHourPrice\": \"100.0\", \n" +
-                "            \"vin\": \"LSJA24U90KS160688\", \n" +
-                "            \"asPlatformCode\": \"荣威RX5MAX\", \n" +
-                "            \"laborCode\": \"681A009\", \n" +
-                "            \"service\": \"更换前雨刮片\", \n" +
-                "            \"manHourCount\": \"0.3\", \n" +
-                "            \"ascCode\": \"2100396\", \n" +
-                "            \"sysName\": \"车身电器\", \n" +
-                "            \"laborDesc\": \"更换前雨刮片\"\n" +
-                "        }\n" +
-                "    ], \n" +
-                "    \"payMethod\": \"2\", \n" +
-                "    \"isNeedCoupon\": 0, \n" +
-                "    \"uniOrderId\": \"781570925664632832\", \n" +
-                "    \"mileage\": \"0.0\", \n" +
-                "    \"reservationPeriod\": \"10:15-10:45\", \n" +
-                "    \"ascHotLine\": \"0512-52670583\", \n" +
-                "    \"orderType\": \"1\", \n" +
-                "    \"laborCost\": \"30.00\", \n" +
-                "    \"vinNo\": \"LSJA24U90KS160688\", \n" +
-                "    \"couponCode\": \"\", \n" +
-                "    \"supplierCode\": \"210079\", \n" +
-                "    \"orderStatus\": \"0\", \n" +
-                "    \"discount\": \"0.00\", \n" +
-                "    \"reservationType\": \"1\", \n" +
-                "    \"source\": \"NDMS\", \n" +
-                "    \"ascShortName\": \"常熟申荣\", \n" +
-                "    \"ascCity\": \"苏州市\", \n" +
-                "    \"manHourTotalQuantity\": \"0.3\", \n" +
-                "    \"ascFullName\": \"常熟申荣汽车销售服务有限公司\", \n" +
-                "    \"partsTotalAmount\": \"117.00\", \n" +
-                "    \"bookingType\": \"1\", \n" +
-                "    \"operationTime\": \"2020-11-26 15:54:53\", \n" +
-                "    \"addTime\": \"2020-11-26 17:23:49\"\n" +
-                "}";
+            "    \"partsTotalQuantity\": \"2\", \n" +
+            "    \"model\": \"AS28车型\", \n" +
+            "    \"tel\": \"17688880002\", \n" +
+            "    \"ascAddress\": \"江苏省常熟市开元东路6号\", \n" +
+            "    \"reservationServiceType\": \"维修\", \n" +
+            "    \"reservationDate\": \"2020-11-29\", \n" +
+            "    \"ascCode\": \"2100396\", \n" +
+            "    \"type\": \"add\", \n" +
+            "    \"discountAmount\": \"0.0\", \n" +
+            "    \"userType\": \"普通用户\", \n" +
+            "    \"ascMailbox\": \"621150030@qq.com\", \n" +
+            "    \"actualTotalAmount\": \"147.00\", \n" +
+            "    \"licenseNo\": \"沪SS12582\", \n" +
+            "    \"vehId\": \"100861526381277\", \n" +
+            "    \"bookingOrderId\": \"1173100001\", \n" +
+            "    \"userId\": \"96921167798856\", \n" +
+            "    \"name\": \"嘚嘚\", \n" +
+            "    \"totalAmount\": \"147.00\", \n" +
+            "    \"tbMaintenanceOrderSaicItemTobs\": [\n" +
+            "        {\n" +
+            "            \"partCode\": \"10514332\", \n" +
+            "            \"itemPartName\": \"风窗玻璃刮水器刮片总成(驾驶侧)\n" +
+            "\", \n" +
+            "            \"partPrice\": \"58.5\", \n" +
+            "            \"partCount\": \"1\", \n" +
+            "            \"serviceItemName\": \"更换前雨刮片（一对）\"\n" +
+            "        }, \n" +
+            "        {\n" +
+            "            \"partCode\": \"10514335\", \n" +
+            "            \"itemPartName\": \"风窗玻璃刮水器刮片总成(乘客侧)\n" +
+            "\", \n" +
+            "            \"partPrice\": \"58.5\", \n" +
+            "            \"partCount\": \"1\", \n" +
+            "            \"serviceItemName\": \"更换前雨刮片（一对）\"\n" +
+            "        }\n" +
+            "    ], \n" +
+            "    \"tbMaintenanceOrderSaicCostTobs\": [\n" +
+            "        {\n" +
+            "            \"typeName\": \"常规保养\", \n" +
+            "            \"manHourPrice\": \"100.0\", \n" +
+            "            \"vin\": \"LSJA24U90KS160688\", \n" +
+            "            \"asPlatformCode\": \"荣威RX5MAX\", \n" +
+            "            \"laborCode\": \"681A009\", \n" +
+            "            \"service\": \"更换前雨刮片\", \n" +
+            "            \"manHourCount\": \"0.3\", \n" +
+            "            \"ascCode\": \"2100396\", \n" +
+            "            \"sysName\": \"车身电器\", \n" +
+            "            \"laborDesc\": \"更换前雨刮片\"\n" +
+            "        }\n" +
+            "    ], \n" +
+            "    \"payMethod\": \"2\", \n" +
+            "    \"isNeedCoupon\": 0, \n" +
+            "    \"uniOrderId\": \"781570925664632832\", \n" +
+            "    \"mileage\": \"0.0\", \n" +
+            "    \"reservationPeriod\": \"10:15-10:45\", \n" +
+            "    \"ascHotLine\": \"0512-52670583\", \n" +
+            "    \"orderType\": \"1\", \n" +
+            "    \"laborCost\": \"30.00\", \n" +
+            "    \"vinNo\": \"LSJA24U90KS160688\", \n" +
+            "    \"couponCode\": \"\", \n" +
+            "    \"supplierCode\": \"210079\", \n" +
+            "    \"orderStatus\": \"0\", \n" +
+            "    \"discount\": \"0.00\", \n" +
+            "    \"reservationType\": \"1\", \n" +
+            "    \"source\": \"NDMS\", \n" +
+            "    \"ascShortName\": \"常熟申荣\", \n" +
+            "    \"ascCity\": \"苏州市\", \n" +
+            "    \"manHourTotalQuantity\": \"0.3\", \n" +
+            "    \"ascFullName\": \"常熟申荣汽车销售服务有限公司\", \n" +
+            "    \"partsTotalAmount\": \"117.00\", \n" +
+            "    \"bookingType\": \"1\", \n" +
+            "    \"operationTime\": \"2020-11-26 15:54:53\", \n" +
+            "    \"addTime\": \"2020-11-26 17:23:49\"\n" +
+            "}";
         System.out.println(JSON.toJSONString(orderInfo).toString());
     }
-
 
 
 }
