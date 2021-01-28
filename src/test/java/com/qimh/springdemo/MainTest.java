@@ -1,9 +1,8 @@
 package com.qimh.springdemo;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.google.common.collect.Maps;
-import com.qimh.entitys.Point;
-import com.qimh.entitys.Point2;
 import com.qimh.entitys.UserEntity;
 import java.time.DayOfWeek;
 import java.time.Instant;
@@ -13,7 +12,6 @@ import java.time.Month;
 import java.time.ZoneOffset;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -22,6 +20,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 /**
  * @author qiminhui
@@ -32,34 +31,54 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-        System.out.println(Point.class.getName());
-        System.out.println(Point2.class.getName());
-        System.out.println(UserEntity.class.getName());
+        JSONArray topicLikeTops = new JSONArray();
+        topicLikeTops.add(1);
+        topicLikeTops.add(2);
+        topicLikeTops.add(3);
+        topicLikeTops.add(4);
+        topicLikeTops.add(5);
+        topicLikeTops.add(6);
+        topicLikeTops.add(7);
+//        topicLikeTops.add(8);
+//        topicLikeTops.add(9);
+//        topicLikeTops.add(10);
+        JSONArray usableTopicLikeTops = new JSONArray();
+        builderUsableTopicliketops(topicLikeTops,usableTopicLikeTops,5,10);
+        System.out.println("usableTopicLikeTops:" + JSON.toJSONString(usableTopicLikeTops));
 
-        int num2 = 0;
-        try {
-            num2 = 1/0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            LOGGER.error("num2:{}",num2,e);
-        }
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, 24);
-        System.out.println("dateTime:" + calendar.getTime());
-
-        String str = "11111     ";
-        System.out.println(str + "|");
-        System.out.println(str.trim() + "|");
-
-        AtomicInteger num = new AtomicInteger(0);
-        testInt(num);
-        testInt2(num);
-//        Integer num = 1;
-//        Integer num2 = 1;
-//        System.out.println(num.equals(num2));
-
-        testStr();
+//        StringBuffer sb = new StringBuffer();
+//        sb.append("11").append("222");
+//
+//        System.out.println(sb);
+//
+//        System.out.println(Point.class.getName());
+//        System.out.println(Point2.class.getName());
+//        System.out.println(UserEntity.class.getName());
+//
+//        int num2 = 0;
+//        try {
+//            num2 = 1/0;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            LOGGER.error("num2:{}",num2,e);
+//        }
+//
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.HOUR, 24);
+//        System.out.println("dateTime:" + calendar.getTime());
+//
+//        String str = "11111     ";
+//        System.out.println(str + "|");
+//        System.out.println(str.trim() + "|");
+//
+//        AtomicInteger num = new AtomicInteger(0);
+//        testInt(num);
+//        testInt2(num);
+////        Integer num = 1;
+////        Integer num2 = 1;
+////        System.out.println(num.equals(num2));
+//
+//        testStr();
 //        System.out.println(testReturn());
 //        testExceptionExecutor();
 
@@ -89,6 +108,32 @@ public class MainTest {
 //        System.out.println("ai:"+ai.get());
 //        System.out.println("ai2:"+ai2.get());
 
+
+
+    }
+
+    private static void builderUsableTopicliketops(JSONArray topicLikeTops, JSONArray usableTopicLikeTops, int min, int max) {
+        if (CollectionUtils.isEmpty(topicLikeTops)){
+            return;
+        }
+        int topicLikeTopsSize = topicLikeTops.size();
+        //数组长度小于等于最大值
+        if (topicLikeTopsSize <= max){
+            max = topicLikeTopsSize;
+        }
+        if (min == 0){
+            for (int i = min; i < max; i++) {
+                usableTopicLikeTops.add(topicLikeTops.get(i));
+            }
+        }else {
+            //数组长度小于等于最小值
+            if (topicLikeTopsSize < min){
+                return;
+            }
+            for (int i = (min-1); i < max; i++) {
+                usableTopicLikeTops.add(topicLikeTops.get(i));
+            }
+        }
     }
 
 
