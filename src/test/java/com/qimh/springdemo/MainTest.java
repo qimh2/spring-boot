@@ -13,6 +13,11 @@ import java.util.concurrent.atomic.AtomicReference;
 public class MainTest {
 
     public static void main(String[] args){
+
+        System.out.println("版本111");
+
+
+
 //        Lock lock = new ReentrantLock();
 
 
