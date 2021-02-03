@@ -50,6 +50,13 @@ public class PointRuleAspect {
             for (int i = 0; i < objs.length; i++) {
                 if (!(objs[i] instanceof ExtendedServletRequestDataBinder) && !(objs[i] instanceof HttpServletResponseWrapper)) {
                     paramMap.put(argNames[i], objs[i]);
+                    if(objs[i] instanceof Point){
+                        System.out.println("method:" +  method.getName());
+                        System.out.println("i am type is Point");
+                        break;
+                    }
+
+
                 }
             }
 
@@ -75,4 +82,5 @@ public class PointRuleAspect {
         return result;
 
     }
+
 }
