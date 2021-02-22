@@ -2,6 +2,7 @@ package com.qimh.springdemo;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.qimh.entitys.UserEntity;
 import java.time.DayOfWeek;
@@ -30,6 +31,19 @@ public class MainTest {
     private static Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
 
     public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i);
+        }
+
+        String str = "1:2:888:abc";
+        System.out.println(str.substring(0,str.lastIndexOf(":")));
+
+
+        JSONObject jb = new JSONObject();
+        testJsonObject(jb);
+        System.out.println("jb2" + jb);
+
+        System.out.println("最近一个版本");
 
         System.out.println("test meger into current");
 
@@ -114,7 +128,15 @@ public class MainTest {
 
     }
 
-    private static void builderUsableTopicliketops(JSONArray topicLikeTops, JSONArray usableTopicLikeTops, int min, int max) {
+    private static void testJsonObject(JSONObject jb) {
+        jb.put("aa","aa");
+        jb = JSON.parseObject("{\"bb\":\"bb\"}");
+        jb.put("cc","cc");
+        System.out.println("jb:" + jb);
+    }
+
+    private static void builderUsableTopicliketops(JSONArray topicLikeTops, JSONArray usableTopicLikeTops, int min,
+        int max) {
         if (CollectionUtils.isEmpty(topicLikeTops)){
             return;
         }
@@ -132,7 +154,7 @@ public class MainTest {
             if (topicLikeTopsSize < min){
                 return;
             }
-            for (int i = (min-1); i < max; i++) {
+            for (int i = (min -1); i < max; i++) {
                 usableTopicLikeTops.add(topicLikeTops.get(i));
             }
         }

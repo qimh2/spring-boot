@@ -69,13 +69,37 @@
 
     </dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+<!--	<build>-->
+<!--		<plugins>-->
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--			</plugin>-->
+
+<!--		</plugins>-->
+<!--	</build>-->
+
+
+<!--	<build>-->
+<!--		<plugins>-->
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-jar-plugin</artifactId>-->
+<!--				<version>3.1.0</version>-->
+<!--				<configuration>-->
+<!--					<archive>-->
+<!--						<manifest>-->
+<!--							&lt;!&ndash; 指定入口函数 &ndash;&gt;-->
+<!--							<mainClass>com.qimh.SpringDemoApplication</mainClass>-->
+<!--							&lt;!&ndash; 是否添加依赖的jar路径配置 &ndash;&gt;-->
+<!--							<addClasspath>true</addClasspath>-->
+<!--							&lt;!&ndash; 依赖的jar包存放位置，和生成的jar放在同一级目录下 &ndash;&gt;-->
+<!--							<classpathPrefix>lib/</classpathPrefix>-->
+<!--						</manifest>-->
+<!--					</archive>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
+<!--		</plugins>-->
+<!--	</build>-->
 
 </project>
