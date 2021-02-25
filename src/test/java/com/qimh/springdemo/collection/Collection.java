@@ -18,7 +18,7 @@ public class Collection {
         list2.add("ff");
 
         // list1 与 list2 存在相同元素，list1集合只保留list2中存在的元素
-        //me---list1 与 list2 的交际，且把交集放入lis1中
+        //me---list1 与 list2 的交际，且清空list1->把交集放入lis1中
         list1.retainAll(list2);
 
         System.out.println(list1);
