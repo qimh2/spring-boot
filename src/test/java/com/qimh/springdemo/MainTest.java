@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.qimh.entitys.UserEntity;
+import java.text.NumberFormat;
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -31,6 +32,42 @@ public class MainTest {
     private static Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
 
     public static void main(String[] args) {
+        //非静态(需要创建外部类实例)内部类内部类赋值，外部类获取
+        Outter myOuter = new Outter();
+        Outter.InnerClass myInner = myOuter.new InnerClass();
+        myInner.setAge(20);
+
+        myOuter.setInnerClass(myInner);
+        System.out.println(myOuter.getInnerClass().getAge());
+
+        //静态内部类内部类赋值，外部类获取
+        Outter.StaticInnerClass staticInnerClass = new Outter.StaticInnerClass();
+        staticInnerClass.setAge(30);
+        myOuter.setStaticInnerClass(staticInnerClass);
+        System.out.println(myOuter.getStaticInnerClass().getAge());
+
+        try {
+            int i = 1/0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            System.out.println("oooooooooooooo");
+        }
+        System.out.println("===========");
+
+        int diliverNum=3;//举例子的变量
+        int queryMailNum=9;//举例子的变量
+        // 创建一个数值格式化对象
+        NumberFormat numberFormat = NumberFormat.getInstance();
+        // 设置精确到小数点后2位
+        numberFormat.setMaximumFractionDigits(1);
+        String result = numberFormat.format((float)diliverNum/(float)queryMailNum);
+
+        System.out.println("result:" + Double.valueOf(result));
+
+        String str2 = " ddd ";
+        System.out.println(str2.length());
+        System.out.println(str2.trim().length());
         System.out.println("test meger into current");
         for (int i = 0; i < 10; i++) {
             System.out.println(i);
