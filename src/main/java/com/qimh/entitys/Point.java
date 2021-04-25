@@ -1,6 +1,6 @@
 package com.qimh.entitys;
 
-public class Point {
+public class Point extends AbstractEntity{
     private String id ;
     private Integer point ;
 

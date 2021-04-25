@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
+import com.qimh.entitys.Point;
 import com.qimh.entitys.UserEntity;
 import java.text.NumberFormat;
 import java.time.DayOfWeek;
@@ -32,6 +33,12 @@ public class MainTest {
     private static Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
 
     public static void main(String[] args) {
+
+        Point point = new Point();
+        point.setCreatedBy("王五");
+        point.setPoint(10);
+        System.out.println(JSON.toJSONString(point));
+
         //非静态(需要创建外部类实例)内部类内部类赋值，外部类获取
         Outter myOuter = new Outter();
         Outter.InnerClass myInner = myOuter.new InnerClass();

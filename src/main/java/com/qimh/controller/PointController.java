@@ -15,7 +15,6 @@ public class PointController {
     @PostMapping("/getPoint")
     @PointRule
     public RestResp<Point> getPoint(@RequestBody Point point){
-
         return new RestResp<>(point);
     }
     @PostMapping("/getPoint2")
