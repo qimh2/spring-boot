@@ -30,6 +30,7 @@ import org.springframework.util.CollectionUtils;
  */
 public class MainTest {
 
+
     private static Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
 
     public static void main(String[] args) {
