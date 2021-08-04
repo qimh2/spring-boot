@@ -11,17 +11,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TestDemo {
+public class TestDemo2 {
 
-    private static final String uri = "/gw/spis/selectUserPointsV2/1.0";
-    private static final String userKey = "brandr";
-    private static final String userSecret = "46cb2da47dc04b98a57394773c5e47e5";
+    private static final String uri = "/gw/spCoupon/fetchHubCouponV2/1.0";
+    private static final String userKey = "coupon";
+    private static final String userSecret = "2d223e65fb3a4273a7ab3ffc15a44ed4";
     private static final String host = "https://oapi-qa.ebanma.com:20016";
 
     public static void main(String[] args) {
         //请求入参转换成字符串
 //        String reqParam = "{\"epCreateOrderDto\":{\"addTime\":\"2020-09-27 17:17:03\",\"brandCode\":4,\"businessOrderId\":\"O202009271717025840\",\"businessStatus\":\"1\",\"buyerId\":\"Rt4Req-PIDzjREAmOUPI5A\",\"buyerName\":\"\",\"couponIds\":[],\"createPayOrder\":false,\"dealType\":\"品位\",\"goodsAmount\":\"55.00\",\"isShow\":1,\"orderAmount\":\"45.80\",\"orderCatId\":\"300102\",\"orderGoods\":[{\"goodsDesc\":\"800g\",\"goodsId\":\"160119826698091084\",\"goodsName\":\"印尼进口 鲜虾片 原味500g（需油炸）\",\"goodsPrice\":\"55.00\",\"goodsUrl\":\"https://jftd-picture.oss-cn-shanghai.aliyuncs.com/202002221019330667.jpg\",\"quantity\":1,\"unit\":\"RMB\"}],\"orderStatus\":\"1004\",\"payOnlineOffline\":\"1\",\"pointsValue\":\"45.80\",\"postage\":\"0.00\",\"price\":\"45.80\",\"remark\":\"\",\"totalQuantity\":1,\"vin\":\"\"}}";
-        String reqParam = "{\"saicOpenId\":\"RGh66T33Ca0in3j4Q9rU5g\",\"brandCode\":\"1\"}";
+        String reqParam = "{\"fetchDto\":{\"userId\":\"19780717821533\",\"couponId\":1717,\"platform\":0,"
+                + "\"quantity\":1}}";
         String now = String.valueOf(System.currentTimeMillis());
         //1、获取加签内容
         String signContent = getSignContent(reqParam, now);
