@@ -35,6 +35,23 @@ public class MainTest {
 
     public static void main(String[] args) {
 
+        Integer a = 9;
+        Integer b = 4;
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (j==1){
+                    continue;
+                }
+                System.out.println("j:"+j);
+
+            }
+
+        }
+
+
+        System.out.println(a.equals(b));
+
         Point point = new Point();
         point.setCreatedBy("王五");
         point.setPoint(10);

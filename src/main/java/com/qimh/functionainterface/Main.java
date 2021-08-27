@@ -1,11 +1,18 @@
 package com.qimh.functionainterface;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args){
+        BigDecimal a = new BigDecimal(100);
+        BigDecimal b = new BigDecimal(6);
+        BigDecimal num = a.divide(b,2);
+        System.out.println("num:" + num);
+
+
         //java8之前
         GreetingService c = new GreetingService() {
             @Override
