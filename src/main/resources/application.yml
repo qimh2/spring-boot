@@ -43,3 +43,5 @@ timer:
   oneDay: 10
 
 
+register:
+  channels: [APP,CCM,XIGUA]
