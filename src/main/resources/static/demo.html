@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <input type="text" ng-model="username">
+    <p>您输入的内容:{{username}}</p>
+</div>
+
+<!--<script src="./demo/angular.1.2.29.js"></script>-->
+<script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
+<script>
+    var app = angular.module("myApp",[]);
+    app.controller("myCtrl",function ($scope) {
+        $scope.username = "qimh";
+    });
+
+</script>
+</body>
+</html>
