@@ -7,16 +7,29 @@
 <div ng-controller="myCtrl">
     <input type="text" ng-model="username">
     <p>您输入的内容:{{username}}</p>
+    <p>当前页面的url：{{myUrl}}</p>
 </div>
+
+
+<div>
+    <input  type="radio"  name="templateBean.isDishonestyCompang" value="true" checked="true"/><span class="input-radio">是</span>
+    <input  type="radio"  name="templateBean.isDishonestyCompang" value="false" /><span class="input-radio">否</span>
+
+</div>
+
 
 <!--<script src="./demo/angular.1.2.29.js"></script>-->
 <script src="https://cdn.staticfile.org/angular.js/1.4.6/angular.min.js"></script>
 <script>
     var app = angular.module("myApp",[]);
-    app.controller("myCtrl",function ($scope) {
+    app.controller("myCtrl",function ($scope,$location) {
         $scope.username = "qimh";
+        $scope.myUrl = $location.absUrl();
+
     });
 
 </script>
+
+
 </body>
 </html>

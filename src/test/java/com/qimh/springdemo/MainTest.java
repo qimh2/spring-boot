@@ -31,6 +31,11 @@ public class MainTest {
     private static Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
 
     public static void main(String[] args) {
+
+        String str2 = "00-00-00";
+        String sub = "00-00-00-00";
+        System.out.println(sub.startsWith(str2));
+
         System.out.println("test meger into current");
         for (int i = 0; i < 10; i++) {
             System.out.println(i);
