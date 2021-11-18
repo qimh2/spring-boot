@@ -30,6 +30,8 @@ public class MainTest {
 
     private static Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
 
+
+
     public static void main(String[] args) {
 
         String str2 = "00-00-00";
