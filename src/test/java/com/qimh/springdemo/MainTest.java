@@ -5,9 +5,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.qimh.entitys.UserEntity;
-
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -34,35 +31,6 @@ public class MainTest {
     private static Logger LOGGER = LoggerFactory.getLogger(MainTest.class);
 
     public static void main(String[] args) {
-
-
-        BigDecimal totalNotIncludedLand = new BigDecimal("0");
-
-        for (int i = 0; i < 2; i++) {
-            BigDecimal number= new BigDecimal(i);
-            totalNotIncludedLand.add(number) ;
-            System.out.println("totalNotIncludedLand=" + totalNotIncludedLand.intValue());
-//            totalNotIncludedLand = totalNotIncludedLand.add(number) ;
-        }
-        System.out.println(totalNotIncludedLand.intValue());
-
-        int bigSize = 120;
-        for (int i = 0; i < bigSize; i++) {
-            if (i == 50 || i < 50){
-                bigSize -= 50;
-                System.out.println("bigSize = " + bigSize);
-            }
-            if (bigSize == 0){
-                break;
-            }
-        }
-
-
-
-        BigDecimal bigDecimal = new BigDecimal("10.0");
-        BigDecimal bigDecimal2 = new BigDecimal("455623.2");
-
-        System.out.println(bigDecimal.divide(bigDecimal2,5,RoundingMode.UP));
 
         String str2 = "00-00-00";
         String sub = "00-00-00-00";
