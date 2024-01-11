@@ -1,8 +1,5 @@
 package com.qimh.impl;
 
-import com.qimh.service.Impl.ServiceImpl;
-import com.qimh.vo.Person;
-
 public class MyClass implements MyInterface {
     @Override
     public void myMethod(String s) {
