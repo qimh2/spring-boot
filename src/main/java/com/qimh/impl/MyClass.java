@@ -3,7 +3,7 @@ package com.qimh.impl;
 public class MyClass implements MyInterface {
     @Override
     public void myMethod(String s) {
-        System.out.println(s);
+//        System.out.println(s);
     }
 
 
